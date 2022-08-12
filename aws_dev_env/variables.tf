@@ -1,5 +1,5 @@
 variable "host_os" {
   type        = string
   default     = "linux"
-  description = "description"
+  description = "default os being used to deploy"
 }
