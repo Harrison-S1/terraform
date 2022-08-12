@@ -1,2 +1,2 @@
-# terraform
-Repo for terraform scripts
+# Terraform
+Repo for terraform builds
