@@ -35,3 +35,16 @@ You will also want to create a new ssh key for this env called `clouddev` with
 ```BASH
 ssh-keygen -t ed25519
 ```
+
+This will build the following:
+
+- VPC
+- Public subnet
+- Internet Gateway
+- Route Table
+- Route Table Association
+- Security Group
+- Key Pair
+- Ubuntu 22.04 instance (t2 micro), with the AMI detailed in the datasources.tf file
+
+The **userdata** will update the instance, install docker and add the user to the docker group. 
