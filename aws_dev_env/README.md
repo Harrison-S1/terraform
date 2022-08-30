@@ -46,5 +46,7 @@ This will build the following:
 - Security Group
 - Key Pair
 - Ubuntu 22.04 instance (t2 micro), with the AMI detailed in the datasources.tf file
+- IAM role to allow the instance to communicate with AWS CloudWatch
+- IAM profile to attach to the instance
 
-The **userdata** will update the instance, install docker and add the user to the docker group. 
+The **userdata** will update the instance, install and set up the cloudwatch configuration file, install docker and add the user to the docker group. 
