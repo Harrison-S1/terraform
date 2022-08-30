@@ -88,11 +88,6 @@ resource "aws_instance" "dev_node" {
     Name = "dev-node"
   }
 
-  provisioner "file" {
-    source      = "./cloudwatch-config.json"
-    destination = "/opt/aws/amazon-cloudwatch-agent"
-  }
-
   provisioner "local-exec" {
     command = templatefile("${var.host_os}-ssh-config.tpl", {
       hostname     = self.public_ip,
