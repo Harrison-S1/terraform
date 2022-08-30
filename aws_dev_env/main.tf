@@ -76,6 +76,7 @@ resource "aws_instance" "dev_node" {
   ami                    = data.aws_ami.server_ami.id
   key_name               = aws_key_pair.clouddev_auth.id
   vpc_security_group_ids = [aws_security_group.main_aws_sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.dev_profile.name
   subnet_id              = aws_subnet.main_public_subnet.id
   user_data              = file("userdata.tpl")
 
@@ -85,6 +86,11 @@ resource "aws_instance" "dev_node" {
 
   tags = {
     Name = "dev-node"
+  }
+
+  provisioner "file" {
+    source      = "./cloudwatch-config.json"
+    destination = "/opt/aws/amazon-cloudwatch-agent"
   }
 
   provisioner "local-exec" {
