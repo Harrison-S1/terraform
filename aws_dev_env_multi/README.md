@@ -1,4 +1,10 @@
-# aws_dev_env
+# aws_dev_env_multi
+
+This is based on the aws_dev_env folder but has been modified to use more than one instances using COUNT.
+Within main.tf under dev_node you can change the number of COUNT to the number of instances that you want. The Cloudwatch alarms are also tied into this. You will need to change the count under to each alarm. You could move the count into variables.tf to link it all together.
+You will also need to add the number of instance created into the output.tf file and address each one individually [Like a array]   
+
+--------------------------------------------------------------------------------------------------------------------------------------
 Terraform AWS dev environment
 
 This is a dev enviroment for AWS. You will need to create a user in AWS to deploy this.
@@ -49,7 +55,7 @@ This will build the following:
 - Security Group
 - Key Pair
 - Ubuntu 22.04 instance (t2 micro), with the AMI detailed in the datasources.tf file
-- Single S3 bucket
+- Sinle S3 bucket
 - IAM role to allow the instance to communicate with AWS CloudWatch
 - IAM profile to attach to the instance
 - SNS Topic

@@ -1,5 +1,6 @@
 resource "aws_cloudwatch_metric_alarm" "devcpu90" {
-  alarm_name                = "WARNING-dev-node-CPUUtilization"
+  count                     = 2
+  alarm_name                = "WARNING-dev_node-${count.index+1}CPUUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "cpu_usage_system"
@@ -13,15 +14,13 @@ resource "aws_cloudwatch_metric_alarm" "devcpu90" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "devcpuuser90" {
-  alarm_name                = "WARNING-dev-node-CPUUtilizationUser"
+  count                     = 2
+  alarm_name                = "WARNING-dev_node-${count.index+1}CPUUtilizationUser"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "cpu_usage_user"
@@ -35,16 +34,13 @@ resource "aws_cloudwatch_metric_alarm" "devcpuuser90" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "devcpu95" {
-  
-  alarm_name                = "CRITICAL-dev-node-CPUUtilization"
+  count                     = 2
+  alarm_name                = "CRITICAL-dev_node-${count.index+1}CPUUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "cpu_usage_system"
@@ -58,16 +54,14 @@ resource "aws_cloudwatch_metric_alarm" "devcpu95" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
+
 }
 
 resource "aws_cloudwatch_metric_alarm" "devcpu95user" {
-  
-  alarm_name                = "CRITICAL-dev-node-CPUUtilizationUser"
+  count                     = 2
+  alarm_name                = "CRITICAL-dev_node-${count.index+1}CPUUtilizationUser"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "cpu_usage_user"
@@ -81,16 +75,14 @@ resource "aws_cloudwatch_metric_alarm" "devcpu95user" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
+
 }
 
 resource "aws_cloudwatch_metric_alarm" "devswap90" {
-  
-  alarm_name                = "WARNING-dev-node-SwapUtilization"
+  count                     = 2
+  alarm_name                = "WARNING-dev_node-${count.index+1}SwapUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "swap_used_percent"
@@ -104,16 +96,13 @@ resource "aws_cloudwatch_metric_alarm" "devswap90" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "devswap95" {
-  
-  alarm_name                = "CRITICAL-dev-node-SwapUtilization"
+  count                     = 2
+  alarm_name                = "CRITICAL-dev_node-${count.index+1}SwapUtilization"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "swap_used_percent"
@@ -127,16 +116,13 @@ resource "aws_cloudwatch_metric_alarm" "devswap95" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "mem_used90" {
-  
-  alarm_name                = "WARNING-dev-node-mem_used"
+  count                     = 2
+  alarm_name                = "WARNING-dev_node-${count.index+1}mem_used"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "mem_used_percent"
@@ -150,16 +136,13 @@ resource "aws_cloudwatch_metric_alarm" "mem_used90" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "mem_used95" {
-  
-  alarm_name                = "CRITICAL-dev-node-mem_used"
+  count                     = 2
+  alarm_name                = "CRITICAL-dev_node-${count.index+1}mem_used"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "mem_used_percent"
@@ -173,17 +156,13 @@ resource "aws_cloudwatch_metric_alarm" "mem_used95" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "ec2_instancedisks_low_space" {
-    
-  
-    alarm_name                = "WARNING-dev-node-disk_used"
+    count                     = 2  
+    alarm_name                = "WARNING-dev_node-${count.index+1}disk_used"
     comparison_operator       = "GreaterThanOrEqualToThreshold"
     evaluation_periods        = "2"
     metric_name               = "disk_used_percent"
@@ -198,21 +177,18 @@ resource "aws_cloudwatch_metric_alarm" "ec2_instancedisks_low_space" {
     treat_missing_data        = "notBreaching"
   
     dimensions = {
-      InstanceId = aws_instance.dev_node.id
+      InstanceId = aws_instance.dev_node[count.index].id
       path       = "/"
       device     = "xvda1"
       fstype     = "ext4"
       ImageId = "ami-09b93cc9c91e4ee20"
       InstanceType = "t2.micro"
     }
-      depends_on = [
-    aws_instance.dev_node
-  ]
 }
 
 resource "aws_cloudwatch_metric_alarm" "StatusCheckFailed" {
-  
-  alarm_name                = "CRITICAL-dev-node-StatusCheckFailed"
+  count                     = 2
+  alarm_name                = "CRITICAL-dev_node-${count.index+1}StatusCheckFailed"
   evaluation_periods        = "1"
   comparison_operator       = "GreaterThanOrEqualToThreshold"
   metric_name               = "StatusCheckFailed"
@@ -226,38 +202,6 @@ resource "aws_cloudwatch_metric_alarm" "StatusCheckFailed" {
   ok_actions                = [aws_sns_topic.dev_topic.arn]
 
     dimensions = {
-    InstanceId = aws_instance.dev_node.id
+    InstanceId = aws_instance.dev_node[count.index].id
   }
-  depends_on = [
-    aws_instance.dev_node
-  ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
