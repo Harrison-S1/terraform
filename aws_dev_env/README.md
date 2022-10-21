@@ -1,3 +1,6 @@
+# unix-dev-terraform
+Terraform AWS dev environment
+
 This is a dev enviroment for AWS. You will need to create a user in AWS to deploy this.
 
 - Log into your AWS account.
@@ -46,7 +49,35 @@ This will build the following:
 - Security Group
 - Key Pair
 - Ubuntu 22.04 instance (t2 micro), with the AMI detailed in the datasources.tf file
+- Single S3 bucket
 - IAM role to allow the instance to communicate with AWS CloudWatch
 - IAM profile to attach to the instance
+- SNS Topic
+  - You need to change the email address within sns.tf if you want email to come through.
+- Cloudwatch monitoring and alarms
+  - CPU system
+  - CPU user
+  - RAM usage
+  - Swap usage
+  - Status Check Failed status
+  - Disk usage
 
-The **userdata** will update the instance, install and set up the cloudwatch configuration file, install docker and add the user to the docker group. 
+You can test the alarms by running the following stress tests:
+```BASH
+sudo apt install stress
+```
+
+```BASH
+sudo stress --cpu 12
+```
+This will max out the CPU.
+
+```BASH
+fallocate -l 6.8GB test.img
+```
+Will take storage to 95%.
+
+> There is a template file for cloudwatch in this repo called cloudwatch.config that you can use in place of the one being used in the userdata
+
+The **userdata** will update the instance, install and set up the cloudwatch configuration file, install docker and add the user to the docker group.
+This will give you a good base to develop from. Furhter reading check out the Terraform [Docs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
