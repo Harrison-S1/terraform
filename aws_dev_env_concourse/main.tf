@@ -66,10 +66,10 @@ resource "aws_security_group" "main_aws_sg" {
   }
 }
 
-resource "aws_key_pair" "clouddev_auth" {
-  key_name   = "clouddev_auth"
-  public_key = file("~/.ssh/clouddev.pub")
-}
+# resource "aws_key_pair" "clouddev_auth" {
+#   key_name   = "clouddev_auth"
+#   public_key = file("~/.ssh/clouddev.pub")
+# }
 
 resource "aws_instance" "dev_node" {
   instance_type          = "t2.micro"
